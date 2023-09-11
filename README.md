@@ -21,10 +21,14 @@ Hello everyone, my goal in this project was to build a model with Water Quality 
 
 ##  Install packaging 
 ```
-pip install -r requirements
+pip install pipenv
 ```
 
+```
+pip install pipenv install pandas scikit-learn joblib fastapi uvicorn catboost 
+```
 
+* Now you have already Pipfile Pipfile.lock files..
 ## Docker
 
 ```
