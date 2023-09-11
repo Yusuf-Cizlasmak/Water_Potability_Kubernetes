@@ -14,7 +14,7 @@ Hello everyone, my goal in this project was to build a model with Water Quality 
 * My notebook about the dataset: [notebook](https://www.kaggle.com/code/yusufcizlasmak1/catboost-eda-adasyn)
 
 ## Requirements
-
+- [pipenv](https://pipenv.pypa.io/en/latest/)
 - [Uvicorn](https://www.uvicorn.org/)
 - [FastAPI](https://fastapi.tiangolo.com/)
 - [Docker](https://www.docker.com/)
