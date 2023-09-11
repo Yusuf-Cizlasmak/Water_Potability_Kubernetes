@@ -47,6 +47,9 @@ docker ps
 
 
 ## Results
+```
+localhost:8000/docs 
+```
 
 ![ezgif com-video-to-gif(1)](https://github.com/Yusuf-Cizlasmak/End_to_End_ML_Project/assets/97342455/4cfdd68d-83c1-4542-bad5-c5eed767baf1)
 
