@@ -1,18 +1,14 @@
 FROM python:3.8-slim
 
-RUN pip install --upgrade pip
-RUN pip install pipenv
+COPY requirements.txt requirements.txt
 
-
-WORKDIR /opt
-COPY ["Pipfile","Pipfile.lock","./"] 
-
-RUN pipenv install --system --deploy
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 COPY . /opt/
 
 
-EXPOSE 8000
+WORKDIR /opt
 
+EXPOSE 8080
 
-ENTRYPOINT  uvicorn main:app --host=0.0.0.0 --port=8000
+ENTRYPOINT FLASK_APP=app.py flask run --host=0.0.0.0 --port:8080
