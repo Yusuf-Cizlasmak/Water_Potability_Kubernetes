@@ -1,15 +1,12 @@
-from flask import Flask, request, jsonify , session ,  url_for , redirect , render_template
+from flask import Flask, request, jsonify, session, url_for, redirect, render_template
 import joblib
-
 from form import InputForm
 
+# Load the model
+classifier_model = joblib.load('saved_models/KNN.pkl')
 
-classifier_model = joblib.load('saved_models/CatBoostModel.pkl')
-
-
-def prediction(model, sample_json):
-
-    # For features
+def make_prediction(model, sample_json):
+    # Extract features from the input JSON
     ph = sample_json['ph']
     Hardness = sample_json['Hardness']
     Solids = sample_json['Solids']
@@ -26,10 +23,8 @@ def prediction(model, sample_json):
 
     return prediction
 
-
 app = Flask(__name__)
-app.config["SECRET_KEY"]="mysecretkey"
-
+app.config["SECRET_KEY"] = "mysecretkey"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -48,22 +43,25 @@ def index():
 
     return render_template('home.html', form=form)
 
-
 @app.route('/prediction')
 def prediction():
-    content = {}
-    content['ph'] = float(session['ph'])
-    content['Hardness'] = float(session['Hardness'])
-    content['Solids'] = float(session['Solids'])
-    content['Chloramines'] = float(session['Chloramines'])
-    content['Sulfate'] = float(session['Sulfate'])
-    content['Conductivity'] = float(session['Conductivity'])
-    content['Organic_carbon'] = float(session['Organic_carbon'])
-    content['Trihalomethanes'] = float(session['Trihalomethanes'])
-    content['Turbidity'] = float(session['Turbidity'])
+    # Ensure session data is not None
+    def get_session_data(key, default=0.0):
+        return float(session.get(key, default) or default)
 
-    results = prediction(classifier_model, content)
+    content = {
+        'ph': get_session_data('ph'),
+        'Hardness': get_session_data('Hardness'),
+        'Solids': get_session_data('Solids'),
+        'Chloramines': get_session_data('Chloramines'),
+        'Sulfate': get_session_data('Sulfate'),
+        'Conductivity': get_session_data('Conductivity'),
+        'Organic_carbon': get_session_data('Organic_carbon'),
+        'Trihalomethanes': get_session_data('Trihalomethanes'),
+        'Turbidity': get_session_data('Turbidity')
+    }
 
+    results = make_prediction(classifier_model, content)
     return render_template('prediction.html', results=results)
 
 if __name__ == '__main__':

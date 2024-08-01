@@ -8,7 +8,7 @@ class InputForm(FlaskForm):
     
     """
 
-    ph = StringField('pH')
+    ph = StringField('ph')
     Hardness = StringField('Hardness')
     Solids = StringField('Solids')
     Chloramines = StringField('Chloramines')
@@ -17,4 +17,6 @@ class InputForm(FlaskForm):
     Organic_carbon = StringField('Organic Carbon')
     Trihalomethanes = StringField('Trihalomethanes')
     Turbidity = StringField('Turbidity')
+
+    
     submit = SubmitField('Submit')
