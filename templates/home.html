@@ -2,76 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Prediction</title>
+    <title>Water Potability Prediction</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="span4"></div>
-        <div class="span4">
-
-<h1>FLASK APP RUNNING</h1>
-<h2>Please enter your flower measurements below:</h2>
-<form method="POST">
-    {# This is hidden_tag is a CSRF security feature. #}
-    {{ form.hidden_tag() }}
-    <table class="table">
-        <tr>
-            <th>Attribute</th>
-            <th>Value</th>
-        </tr>
-        <tr>
-            <td> pH </td>
-            <td> {{ form.ph }}</td>
-        </tr>
-        <tr>
-            <td> Hardness </td>
-            <td> {{ form.Hardness }}</td>
-        </tr>
-        <tr>
-            <td> Solids </td>
-            <td> {{ form.Solids }}</td>
-        </tr>
-        <tr>
-            <td> Chloramines </td>
-            <td> {{ form.Chloramines }}</td>
-        </tr>
-        <tr>
-            <td> Sulfate </td>
-            <td> {{ form.Sulfate }}</td>
-        </tr>
-        <tr>
-            <td> Conductivity </td>
-            <td> {{ form.Conductivity }}</td>
-        </tr>
-        <tr>
-            <td> Organic Carbon </td>
-            <td> {{ form.Organic_carbon }}</td>
-        </tr>
-        <tr>
-            <td> Trihalomethanes </td>
-            <td> {{ form.Trihalomethanes }}</td>
-        </tr>
-        <tr>
-            <td> Turbidity </td>
-            <td> {{ form.Turbidity }}</td>
-        </tr>
-    </table>
-    {{ form.submit() }}
-</form>
-</form>
-</div>
-<div class="span4"></div>
-
-
-</div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center my-4">Water Potability Prediction</h1>
+            <h2 class="text-center mb-4">Enter the Water Quality Parameters:</h2>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label for="ph">pH</label>
+                    {{ form.ph(class_="form-control", placeholder="Enter pH value") }}
+                </div>
+                <div class="form-group">
+                    <label for="Hardness">Hardness</label>
+                    {{ form.Hardness(class_="form-control", placeholder="Enter Hardness value") }}
+                </div>
+                <div class="form-group">
+                    <label for="Solids">Solids</label>
+                    {{ form.Solids(class_="form-control", placeholder="Enter Solids value") }}
+                </div>
+                <div class="form-group">
+                    <label for="Chloramines">Chloramines</label>
+                    {{ form.Chloramines(class_="form-control", placeholder="Enter Chloramines value") }}
+                </div>
+                <div class="form-group">
+                    <label for="Sulfate">Sulfate</label>
+                    {{ form.Sulfate(class_="form-control", placeholder="Enter Sulfate value") }}
+                </div>
+                <div class="form-group">
+                    <label for="Conductivity">Conductivity</label>
+                    {{ form.Conductivity(class_="form-control", placeholder="Enter Conductivity value") }}
+                </div>
+                <div class="form-group">
+                    <label for="Organic_carbon">Organic Carbon</label>
+                    {{ form.Organic_carbon(class_="form-control", placeholder="Enter Organic Carbon value") }}
+                </div>
+                <div class="form-group">
+                    <label for="Trihalomethanes">Trihalomethanes</label>
+                    {{ form.Trihalomethanes(class_="form-control", placeholder="Enter Trihalomethanes value") }}
+                </div>
+                <div class="form-group">
+                    <label for="Turbidity">Turbidity</label>
+                    {{ form.Turbidity(class_="form-control", placeholder="Enter Turbidity value") }}
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Predict Water Potability</button>
+            </form>
+        </div>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6Hty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4xF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

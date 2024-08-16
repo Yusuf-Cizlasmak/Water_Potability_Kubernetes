@@ -10,10 +10,9 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import PowerTransformer
 from imblearn.over_sampling import ADASYN
-import seaborn as sns
-import matplotlib.pyplot as plt
+from imblearn.pipeline import Pipeline as ImbPipeline
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -22,7 +21,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 DATA_PATH = "water_potability.csv"
 MODEL_DIR = "saved_models"
 MODEL_NAME = "KNN.pkl"
-TEST_SIZE = 0.07
+TEST_SIZE = 0.05
 RANDOM_STATE = 24
 CV_FOLDS = 5
 
@@ -42,20 +41,6 @@ def vis_report_classification(y_true: List[int], y_pred: List[int]) -> pd.DataFr
     df["support"] = df["support"].apply(int)
     return df
 
-def balance_data_with_adasyn(X, y):
-    """Balance the dataset using ADASYN and return the balanced dataset with labels."""
-    logging.info("Balancing dataset with ADASYN...")
-
-    # Eksik değerleri doldur
-    imputer = SimpleImputer(strategy="mean")
-    X_imputed = imputer.fit_transform(X)
-
-    adasyn = ADASYN(sampling_strategy='minority', random_state=RANDOM_STATE)
-    X_res, y_res = adasyn.fit_resample(X_imputed, y)
-    
-    return X_res, y_res, adasyn
-
-
 
 def load_data(filepath: str) -> pd.DataFrame:
     """Load the dataset from a CSV file."""
@@ -72,11 +57,13 @@ def preprocess_data(data: pd.DataFrame) -> Tuple[pd.DataFrame, pd.Series]:
     y = data.iloc[:, -1]
     return X, y
 
-def build_pipeline() -> Pipeline:
+def build_pipeline():
     """Build a machine learning pipeline."""
-    pipeline = Pipeline([
-        ('imputer', SimpleImputer(strategy="mean")),  # Handle missing values
-        ('scaler', StandardScaler()),  # Feature scaling
+
+    pipeline = ImbPipeline([
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', PowerTransformer()),
+        ('balancer', ADASYN(random_state=RANDOM_STATE)),
         ('classifier', KNeighborsClassifier(**KNN_PARAMS))
     ])
     return pipeline
@@ -113,17 +100,16 @@ def main():
     )
 
     # Balance the training data with ADASYN
-    X_train_balanced, y_train_balanced, adasyn = balance_data_with_adasyn(X_train, y_train)
 
     # Build and train the pipeline
     model_pipeline = build_pipeline()
 
     # Cross-Validation
     logging.info("Performing cross-validation...")
-    cv_scores = cross_val_score(model_pipeline, X_train_balanced, y_train_balanced, cv=CV_FOLDS)
+    cv_scores = cross_val_score(model_pipeline, X_train, y_train, cv=CV_FOLDS)
     logging.info(f"Cross-validation scores: {cv_scores.mean():.2f} ± {cv_scores.std():.2f}")
 
-    model_pipeline.fit(X_train_balanced, y_train_balanced)
+    model_pipeline.fit(X_train, y_train)
 
     # Predict and evaluate
     y_pred = model_pipeline.predict(X_test)

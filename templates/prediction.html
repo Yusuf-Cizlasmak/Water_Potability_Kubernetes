@@ -2,41 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Prediction</title>
+    <title>Water Potability Prediction - Results</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="span4"></div>
-        <div class="span4">
-
-<h1>Thank you. Here is the information you have provided.</h1>
-<ul class="list-group">
-     <li class="list-group-item">ph: {{ session['ph'] }}</li>
-     <li class="list-group-item">Hardness: {{ session['Hardness'] }}</li>
-     <li class="list-group-item">Solids: {{ session['Solids'] }}</li>
-     <li class="list-group-item">Chloramines: {{ session['Chloramines'] }}</li>
-     <li class="list-group-item">Sulfate: {{ session['Sulfate'] }}</li>
-     <li class="list-group-item">Conductivity: {{ session['Conductivity'] }}</li>
-     <li class="list-group-item">Organic_carbon: {{ session['Organic_carbon'] }}</li>
-     <li class="list-group-item">Trihalomethanes: {{ session['Trihalomethanes'] }}</li>
-     <li class="list-group-item">Turbidity: {{ session['Turbidity'] }}</li>
-</ul>
-<br>
-            <h2>Prediction Result: <span style="color:red;">{{ results }}</span></h2>
-
-</div>
-<div class="span4"></div>
-
-
-</div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center my-4">Prediction Results</h1>
+            <p class="text-center">Thank you. Here is the information you have provided:</p>
+            <ul class="list-group mb-4">
+                 <li class="list-group-item"><strong>pH:</strong> {{ session['ph'] }}</li>
+                 <li class="list-group-item"><strong>Hardness:</strong> {{ session['Hardness'] }}</li>
+                 <li class="list-group-item"><strong>Solids:</strong> {{ session['Solids'] }}</li>
+                 <li class="list-group-item"><strong>Chloramines:</strong> {{ session['Chloramines'] }}</li>
+                 <li class="list-group-item"><strong>Sulfate:</strong> {{ session['Sulfate'] }}</li>
+                 <li class="list-group-item"><strong>Conductivity:</strong> {{ session['Conductivity'] }}</li>
+                 <li class="list-group-item"><strong>Organic Carbon:</strong> {{ session['Organic_carbon'] }}</li>
+                 <li class="list-group-item"><strong>Trihalomethanes:</strong> {{ session['Trihalomethanes'] }}</li>
+                 <li class="list-group-item"><strong>Turbidity:</strong> {{ session['Turbidity'] }}</li>
+            </ul>
+            <div class="alert alert-info text-center">
+                <h2>Prediction Result: <span style="color:red;">{{ results }}</span></h2>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6Hty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
