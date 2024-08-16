@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: water-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: water-app
+  template:
+    metadata:
+      labels:
+        app: water-app
+    spec:
+      containers:
+      - name: water-app
+        image: ycizlasmak/water:1.2.0
+        ports:
+        - containerPort: 8080
