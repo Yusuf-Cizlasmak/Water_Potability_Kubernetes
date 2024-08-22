@@ -1,4 +1,4 @@
-## ML Project
+## WATER POTABILITY PREDICTION
 
 Hello everyone, my goal in this project was to build a model with Water Quality and Potability dataset and deploy it. Our aim in the project is to find out whether the water is of good quality or poor quality through data. If the prediction is **1** , the result shows that the **drinkable(good quality)**, if it is **0**, it shows that the water is **undrinkable**.
 
