@@ -21,10 +21,10 @@ def make_prediction(model, sample_json):
     prediction = model.predict([[ph, Hardness, Solids, Chloramines, Sulfate,
                                  Conductivity, Organic_carbon, Trihalomethanes, Turbidity]])
 
-    # if prediction[0] == 0:
-    #     prediction = 'Not Potable'
-    # else:
-    #     prediction = 'Potable'
+    if prediction[0] == 0:
+        prediction = 'Not Potable'
+    else:
+        prediction = 'Potable'
 
 
     return prediction

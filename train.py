@@ -13,6 +13,9 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import PowerTransformer
 from imblearn.over_sampling import ADASYN
 from imblearn.pipeline import Pipeline as ImbPipeline
+from sklearn.model_selection import StratifiedShuffleSplit
+import matplotlib.pyplot as plt
+
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -21,7 +24,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 DATA_PATH = "water_potability.csv"
 MODEL_DIR = "saved_models"
 MODEL_NAME = "KNN.pkl"
-TEST_SIZE = 0.05
+TEST_SIZE = 0.07
 RANDOM_STATE = 24
 CV_FOLDS = 5
 
@@ -94,15 +97,34 @@ def main():
     data = load_data(DATA_PATH)
     X, y = preprocess_data(data)
 
-    # Split the data
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE
-    )
+    # Split the data using StratifiedShuffleSplit
+    sss = StratifiedShuffleSplit(n_splits=1, test_size=TEST_SIZE, random_state=RANDOM_STATE)
+    for train_index, test_index in sss.split(X, y):
+        X_train, X_test = X.iloc[train_index], X.iloc[test_index]
+        y_train, y_test = y.iloc[train_index], y.iloc[test_index]
+
+
+    plt.figure(figsize=(10, 15))
+
+    plt.subplot(1, 2, 1)
+    plt.pie(y_train.value_counts(), labels=y_train.unique(), autopct='%1.2f%%', shadow=True)
+    plt.title('Training Dataset')
+
+    plt.subplot(1, 2, 2)
+    plt.pie(y_test.value_counts(), labels=y_test.unique(), autopct='%1.2f%%', shadow=True)
+    plt.title('Test Dataset')
+
+    plt.tight_layout()
+    plt.show()
+
 
     # Balance the training data with ADASYN
 
     # Build and train the pipeline
     model_pipeline = build_pipeline()
+
+
+
 
     # Cross-Validation
     logging.info("Performing cross-validation...")
@@ -118,6 +140,7 @@ def main():
 
     # Save the trained model
     save_model(model_pipeline, model_path)
+
 
     # Load the model and make a prediction
     model_loaded = load_model(model_path)

@@ -14,19 +14,28 @@
             <h1 class="text-center my-4">Prediction Results</h1>
             <p class="text-center">Thank you. Here is the information you have provided:</p>
             <ul class="list-group mb-4">
-                 <li class="list-group-item"><strong>pH:</strong> {{ session['ph'] }}</li>
-                 <li class="list-group-item"><strong>Hardness:</strong> {{ session['Hardness'] }}</li>
-                 <li class="list-group-item"><strong>Solids:</strong> {{ session['Solids'] }}</li>
-                 <li class="list-group-item"><strong>Chloramines:</strong> {{ session['Chloramines'] }}</li>
-                 <li class="list-group-item"><strong>Sulfate:</strong> {{ session['Sulfate'] }}</li>
-                 <li class="list-group-item"><strong>Conductivity:</strong> {{ session['Conductivity'] }}</li>
-                 <li class="list-group-item"><strong>Organic Carbon:</strong> {{ session['Organic_carbon'] }}</li>
-                 <li class="list-group-item"><strong>Trihalomethanes:</strong> {{ session['Trihalomethanes'] }}</li>
-                 <li class="list-group-item"><strong>Turbidity:</strong> {{ session['Turbidity'] }}</li>
+                <li class="list-group-item"><strong>pH:</strong> {{ session['ph'] }}</li>
+                <li class="list-group-item"><strong>Hardness:</strong> {{ session['Hardness'] }}</li>
+                <li class="list-group-item"><strong>Solids:</strong> {{ session['Solids'] }}</li>
+                <li class="list-group-item"><strong>Chloramines:</strong> {{ session['Chloramines'] }}</li>
+                <li class="list-group-item"><strong>Sulfate:</strong> {{ session['Sulfate'] }}</li>
+                <li class="list-group-item"><strong>Conductivity:</strong> {{ session['Conductivity'] }}</li>
+                <li class="list-group-item"><strong>Organic Carbon:</strong> {{ session['Organic_carbon'] }}</li>
+                <li class="list-group-item"><strong>Trihalomethanes:</strong> {{ session['Trihalomethanes'] }}</li>
+                <li class="list-group-item"><strong>Turbidity:</strong> {{ session['Turbidity'] }}</li>
             </ul>
             <div class="alert alert-info text-center">
                 <h2>Prediction Result: <span style="color:red;">{{ results }}</span></h2>
             </div>
+            {% if results == 'Potable' %}
+                <div class="text-center">
+                    <img src="https://symbols.getvecta.com/stencil_202/2_potable-water.d7d7188d90.svg" alt="Potable Water" style="width: 200px; height: 200px;">
+                </div>
+            {% else %}
+                <div class="text-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTLDM_ex85MpflpEZwV0v7Hwd8Iz_eKZ98vw&s" alt="Not Potable Water" style="width: 200px; height: 200px;">
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>
